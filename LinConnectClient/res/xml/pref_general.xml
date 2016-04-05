@@ -40,6 +40,12 @@
             android:title="@string/pref_refresh" >
         </Preference>
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/utilisation" >
+        <Preference
+            android:key="pref_send_link"
+            android:summary="@string/pref_send_link_summary"
+            android:title="@string/pref_send_link" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/configuration" >
         <Preference
             android:key="pref_application"

@@ -86,7 +86,7 @@ public class NotificationUtilities {
             if (notificationData.size() > 0) {
                 notificationHeader = notificationData.get(0);
                 if (notificationData.size() > 1) {
-                    notificationBody = notificationData.get(1);
+                    notificationBody = "{\"data\":\""+notificationData.get(1);
                 }
             } else {
                 return false;
@@ -94,7 +94,7 @@ public class NotificationUtilities {
 
 
             for (int i = 2; i < notificationData.size(); i++) {
-                notificationBody += "\n" + notificationData.get(i);
+                notificationBody +="  " + notificationData.get(i);
             }
 
             // Append application name to body
@@ -102,7 +102,7 @@ public class NotificationUtilities {
                 if (notificationBody.isEmpty()) {
                     notificationBody = "via " + pm.getApplicationLabel(ai);
                 } else {
-                    notificationBody += " (via " + pm.getApplicationLabel(ai) + ")";
+                    notificationBody += "\","+"\"appname\":\""+ pm.getApplicationLabel(ai) + "\"}";
                 }
             }
 

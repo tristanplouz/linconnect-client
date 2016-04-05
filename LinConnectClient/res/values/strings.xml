@@ -4,6 +4,7 @@
     <string name="app_name">LinConnect</string>
     <string name="action_settings">Settings</string>
     <string name="description">LinConnect mirrors Android notifications on a Linux deskop.</string>
+    <string name="utilisation">Things you be able to do with server</string>
     <string name="configuration">Configuration</string>
     <string name="information">Information</string>
     
@@ -20,6 +21,8 @@
     <string name="pref_application_summary">Tap here to choose which applications can send notifications to the desktop (optional)</string>
     <string name="pref_additional_options">Additional options</string>
     <string name="pref_additional_options_summary">Additional options can be found in the server configuration file (conf.ini)</string>
+    <string name="pref_send_link">Send a link</string>
+    <string name="pref_send_link_summary">Tap here to send a link to the server</string>
     <string name="pref_google_plus">Follow on Google+</string>
     <string name="pref_google_plus_summary">Tap here to follow yycode on Google+</string>
     <string name="pref_donate_play">Donate via Google Play</string>

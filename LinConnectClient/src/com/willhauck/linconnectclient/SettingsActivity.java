@@ -118,7 +118,7 @@ public class SettingsActivity extends PreferenceActivity {
 		// Add preferences from XML
 		addPreferencesFromResource(R.xml.pref_general);
 		bindPreferenceSummaryToValue(findPreference("pref_ip"));
-
+		
 		// Preference Categories
 		serverCategory = ((PreferenceCategory) findPreference("cat_servers"));
 
@@ -169,6 +169,36 @@ public class SettingsActivity extends PreferenceActivity {
 								.getDrawable(R.drawable.ic_launcher);
 						new TestTask().execute(notif);
 
+						return true;
+					}
+				});
+		Preference prefSendLink = findPreference("pref_send_link");
+		prefSendLink
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
+					public boolean onPreferenceClick(Preference arg0) {
+					
+							final EditText input = new EditText(SettingsActivity.this);
+
+							new AlertDialog.Builder(SettingsActivity.this)
+									.setTitle("Link to send")
+									.setMessage(
+											"Please enter your link to send")
+									.setView(input)
+									.setPositiveButton(
+											"Send link",
+											new DialogInterface.OnClickListener() {
+												public void onClick(
+														DialogInterface dialog,
+														int whichButton) {
+													Object[] notif = new Object[3];
+													notif[0]="A link for you";
+													notif[1]=input.getText().toString();
+													notif[2]=SettingsActivity.this.getResources()
+								.getDrawable(R.drawable.ic_launcher);;
+													new TestTask().execute(notif);
+												}
+											}).show();
 						return true;
 					}
 				});
@@ -540,12 +570,12 @@ public class SettingsActivity extends PreferenceActivity {
 		protected void onPostExecute(Boolean result) {
 			if (result == true) {
 				Toast.makeText(getApplicationContext(),
-						"Test notification recieved.", Toast.LENGTH_SHORT)
+						"La notification de test a été recu par le server.", Toast.LENGTH_SHORT)
 						.show();
 			} else {
 				Toast.makeText(
 						getApplicationContext(),
-						"Test notification not recieved. Ensure the server is updated to the latest version.",
+						"Erreur, Est ce que le server est correctement lancé avec la derniere version?.",
 						Toast.LENGTH_LONG).show();
 			}
 
