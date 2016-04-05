@@ -185,18 +185,21 @@ public class SettingsActivity extends PreferenceActivity {
 									.setMessage(
 											"Please enter your link to send")
 									.setView(input)
-									.setPositiveButton(
-											"Send link",
+									.setPositiveButton("Send link",
 											new DialogInterface.OnClickListener() {
-												public void onClick(
-														DialogInterface dialog,
-														int whichButton) {
+												public void onClick(DialogInterface dialog, int whichButton) {
 													Object[] notif = new Object[3];
 													notif[0]="A link for you";
 													notif[1]=input.getText().toString();
-													notif[2]=SettingsActivity.this.getResources()
-								.getDrawable(R.drawable.ic_launcher);;
-													new TestTask().execute(notif);
+													notif[2]=SettingsActivity.this.getResources().getDrawable(R.drawable.ic_launcher);;
+													if(input.getText().toString()!=""){
+														new TestTask().execute(notif);
+													}
+													else{
+														Toast.makeText(getApplicationContext(),
+						"le lien est vide et ne sera pas envoyé au server,\nReessayez",
+						Toast.LENGTH_LONG).show();
+													}
 												}
 											}).show();
 						return true;
@@ -570,7 +573,7 @@ public class SettingsActivity extends PreferenceActivity {
 		protected void onPostExecute(Boolean result) {
 			if (result == true) {
 				Toast.makeText(getApplicationContext(),
-						"La notification de test a été recu par le server.", Toast.LENGTH_SHORT)
+						"La notification a été correctement recu par le server.", Toast.LENGTH_SHORT)
 						.show();
 			} else {
 				Toast.makeText(

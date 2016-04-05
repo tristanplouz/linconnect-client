@@ -68,8 +68,7 @@ public class NotificationUtilities {
             String ip = prefs.getString("pref_ip", "0.0.0.0:9090");
 
             // Magically extract text from notification
-            ArrayList<String> notificationData = NotificationUtilities
-                    .getNotificationText(n);
+            ArrayList<String> notificationData = NotificationUtilities.getNotificationText(n);
 
             // Use PackageManager to get application name and icon
             final PackageManager pm = c.getPackageManager();
@@ -82,11 +81,15 @@ public class NotificationUtilities {
 
             String notificationBody = "";
             String notificationHeader = "";
+            ArrayList<String> actionOfNotif = new ArrayList<String>();
             // Create header and body of notification
             if (notificationData.size() > 0) {
                 notificationHeader = notificationData.get(0);
                 if (notificationData.size() > 1) {
-                    notificationBody = "{\"data\":\""+notificationData.get(1);
+                    for (int i = 0; i < n.actions.length; i++) {
+                        actionOfNotif.add("{\"act\":\""+ n.actions[i].title.toString()+"\",\"intent\":\""+n.actions[i].actionIntent+"\"}");
+                    }
+                    notificationBody = "{\"title\":\""+notificationHeader+"\",\"action\":"+actionOfNotif.toString()+",\"data\":\""+notificationData.get(1);
                 }
             } else {
                 return false;
@@ -100,7 +103,7 @@ public class NotificationUtilities {
             // Append application name to body
             if (pm.getApplicationLabel(ai) != null) {
                 if (notificationBody.isEmpty()) {
-                    notificationBody = "via " + pm.getApplicationLabel(ai);
+                    notificationBody = "\","+"\"appname\":\""+ pm.getApplicationLabel(ai) + "\"}";
                 } else {
                     notificationBody += "\","+"\"appname\":\""+ pm.getApplicationLabel(ai) + "\"}";
                 }
@@ -165,8 +168,7 @@ public class NotificationUtilities {
     }
 
     @SuppressLint("DefaultLocale")
-    public static ArrayList<String> getNotificationText(
-            Notification notification) {
+    public static ArrayList<String> getNotificationText(Notification notification){
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Bundle extras = notification.extras;
